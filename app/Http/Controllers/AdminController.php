@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ContactSearchRequest;
 use App\Models\Category;
 use App\Models\Contact;
 use App\Models\Tag;
-use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index(ContactSearchRequest $request)
     {
-        $filters = $request->only(['keyword', 'email', 'gender', 'category_id', 'date']);
+        $filters = $request->validated();
+
+        $filters['email'] = $request->input('email');
 
         $contacts = Contact::with(['category', 'tags'])->search($filters)->latest()->paginate(7)->withQueryString();
 
