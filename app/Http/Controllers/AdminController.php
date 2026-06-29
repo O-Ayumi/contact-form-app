@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ContactSearchRequest;
+use App\Http\Requests\IndexContactRequest;
 use App\Models\Category;
 use App\Models\Contact;
 use App\Models\Tag;
@@ -12,11 +12,9 @@ class AdminController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(ContactSearchRequest $request)
+    public function index(IndexContactRequest $request)
     {
         $filters = $request->validated();
-
-        $filters['email'] = $request->input('email');
 
         $contacts = Contact::with(['category', 'tags'])->search($filters)->latest()->paginate(7)->withQueryString();
 

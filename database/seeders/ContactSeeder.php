@@ -15,7 +15,7 @@ class ContactSeeder extends Seeder
      */
     public function run(): void
     {
-        $faker = Faker::create();
+        $faker = Faker::create('ja_JP');
 
         $categoryIds = Category::pluck('id')->toArray();
         $tags = Tag::all();

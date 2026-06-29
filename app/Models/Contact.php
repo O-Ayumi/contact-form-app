@@ -48,13 +48,12 @@ class Contact extends Model
         return $query
             ->when($filters['keyword'] ?? null, function ($query, $keyword) {
                 $query->where(function ($q) use ($keyword) {
-                    $q->where('first_name', 'like', "%{$keyword}%")->orWhere('last_name', 'like', "%{$keyword}%");
+                    $searchWord = trim(mb_convert_kana($keyword, 's'));
+
+                    $q->where('first_name', 'like', '%'.$searchWord.'%')->orWhere('last_name', 'like', '%'.$searchWord.'%')->orWhere('email', 'like', '%'.$searchWord.'%');
                 });
             })
-            ->when($filters['email'] ?? null, function ($query, $email) {
-                $query->where('email', $email);
-            })
-            ->when(isset($filters['gender']) ?? $filters['gender'] !== '0' && $filters['gender'] !== '', function ($query) use ($filters) {
+            ->when(isset($filters['gender']) && $filters['gender'] !== '0' && $filters['gender'] !== '', function ($query) use ($filters) {
                 $query->where('gender', $filters['gender']);
             })
             ->when($filters['category_id'] ?? null, function ($query, $categoryId) {
