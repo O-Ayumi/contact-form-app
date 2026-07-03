@@ -3,12 +3,11 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Models\Contact;
 use App\Http\Requests\Api\V1\IndexContactRequest;
 use App\Http\Requests\Api\V1\StoreContactRequest;
 use App\Http\Requests\Api\V1\UpdateContactRequest;
 use App\Http\Resources\ContactResource;
-use Illuminate\Http\Request;
+use App\Models\Contact;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class ContactController extends Controller
@@ -36,7 +35,7 @@ class ContactController extends Controller
 
         $contact = Contact::create($validated);
 
-        if (!empty($validated['tag_ids'])) {
+        if (! empty($validated['tag_ids'])) {
             $contact->tags()->attach($validated['tag_ids']);
         }
 
@@ -46,7 +45,7 @@ class ContactController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(contact $contact): ContactResource
+    public function show(Contact $contact): ContactResource
     {
         $contact->load(['category', 'tags']);
 

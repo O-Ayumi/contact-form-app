@@ -25,6 +25,13 @@ cd contact-form-app
 (エイリアスを設定していればsail up -d)
 
 4. .envファイルのデータベース接続情報などを環境に合わせて変更する
+DB_CONNECTION=mysql
+DB_HOST=mysql
+DB_PORT=3306
+DB_DATABASE=laravel
+DB_USERNAME=sail
+DB_PASSWORD=password
+になっているのを確認する
 
 5. アプリケーションキーを生成する
 sail artisan key:generate
