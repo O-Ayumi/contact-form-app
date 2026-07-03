@@ -197,4 +197,17 @@ class AdminControllerTest extends TestCase
 
         $response->assertSessionHasErrors(['gender', 'category_id']);
     }
+
+    /** @test */
+    public function 認証ユーザーのみ管理画面を表示でき、未認証ユーザーはログイン画面にリダイレクトされる(): void
+    {
+        $user = User::first();
+
+        $response = $this->actingAs($user)->get(route('admin.index'));
+
+        $response->assertStatus(200);
+
+        $unauthorizedResponse = $this->get(route('admin.index'));
+        $unauthorizedResponse->assertRedirect('/login');
+    }
 }
