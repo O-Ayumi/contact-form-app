@@ -199,15 +199,20 @@ class AdminControllerTest extends TestCase
     }
 
     /** @test */
-    public function 認証ユーザーのみ管理画面を表示でき、未認証ユーザーはログイン画面にリダイレクトされる(): void
+    public function 認証ユーザーのみ管理画面を表示できる(): void
     {
         $user = User::first();
 
         $response = $this->actingAs($user)->get(route('admin.index'));
 
         $response->assertStatus(200);
+    }
 
-        $unauthorizedResponse = $this->get(route('admin.index'));
-        $unauthorizedResponse->assertRedirect('/login');
+    /** @test */
+    public function 未認証ユーザーは管理画面にアクセスするとログインページにリダイレクトされる(): void
+    {
+        $response = $this->get(route('admin.index'));
+
+        $response->assertRedirect('/login');
     }
 }
