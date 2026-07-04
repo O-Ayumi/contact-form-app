@@ -4,8 +4,8 @@ namespace Tests\Feature;
 
 use App\Models\Category;
 use App\Models\Contact;
-use App\Models\User;
 use App\Models\Tag;
+use App\Models\User;
 use Database\Seeders\CategorySeeder;
 use Database\Seeders\ContactSeeder;
 use Database\Seeders\TagSeeder;
@@ -138,7 +138,7 @@ class AdminControllerTest extends TestCase
     }
 
     /** @test */
-    public function ログイン済管理者がフィルタ条件付きでCSVをDLでき、無指定時は新着順で出力される(): void
+    public function ログイン済管理者がフィルタ条件付きで_cs_vを_d_lでき、無指定時は新着順で出力される(): void
     {
         $user = User::first();
         $categoryId = Category::first()->id;
@@ -185,7 +185,7 @@ class AdminControllerTest extends TestCase
     }
 
     /** @test */
-    public function CSVエクスポートの際は不正な性別や存在しないカテゴリIDを拒否する(): void
+    public function cs_vエクスポートの際は不正な性別や存在しないカテゴリ_i_dを拒否する(): void
     {
         $user = User::first();
         $invalidCategoryId = 9999;

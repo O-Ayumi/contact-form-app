@@ -2,10 +2,9 @@
 
 namespace Tests\Feature;
 
-use App\Models\Category;
 use App\Models\Contact;
-use App\Models\User;
 use App\Models\Tag;
+use App\Models\User;
 use Database\Seeders\CategorySeeder;
 use Database\Seeders\ContactSeeder;
 use Database\Seeders\TagSeeder;
@@ -59,7 +58,7 @@ class TagControllerTest extends TestCase
     }
 
     /** @test */
-    public function 認証ユーザーはPUTでタグを更新できる(): void
+    public function 認証ユーザーは_pu_tでタグを更新できる(): void
     {
         $user = User::first();
         $tag = Tag::first();
@@ -76,7 +75,7 @@ class TagControllerTest extends TestCase
     }
 
     /** @test */
-    public function 認証済みユーザーはDELETEでタグを削除できる(): void
+    public function 認証済みユーザーは_delet_eでタグを削除できる(): void
     {
         $user = User::first();
         $tag = Tag::first();
@@ -101,7 +100,7 @@ class TagControllerTest extends TestCase
         $editResponse->assertRedirect('/login');
 
         $updateResponse = $this->put(route('admin.tags.update', $tag), [
-            'name' => '拒否テスト'
+            'name' => '拒否テスト',
         ]);
         $updateResponse->assertRedirect('/login');
 
