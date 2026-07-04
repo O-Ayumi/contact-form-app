@@ -58,7 +58,7 @@ class TagControllerTest extends TestCase
     }
 
     /** @test */
-    public function 認証ユーザーは_pu_tでタグを更新できる(): void
+    public function 認証ユーザーはタグを更新できる(): void
     {
         $user = User::first();
         $tag = Tag::first();
@@ -75,7 +75,7 @@ class TagControllerTest extends TestCase
     }
 
     /** @test */
-    public function 認証済みユーザーは_delet_eでタグを削除できる(): void
+    public function 認証済みユーザーはでタグを削除できる(): void
     {
         $user = User::first();
         $tag = Tag::first();
