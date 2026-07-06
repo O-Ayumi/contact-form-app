@@ -16,6 +16,11 @@
         <include>
             <directory>app</directory>
         </include>
+        <exclude>
+            <directory>./app/Actions/Fortify</directory>
+            <directory>./app/Http/Middleware</directory>
+            <directory>./app/Providers</directory>
+        </exclude>
     </source>
     <php>
         <env name="APP_ENV" value="testing"/>
