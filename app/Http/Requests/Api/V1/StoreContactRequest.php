@@ -4,6 +4,8 @@ namespace App\Http\Requests\Api\V1;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class StoreContactRequest extends FormRequest
 {
@@ -45,5 +47,15 @@ class StoreContactRequest extends FormRequest
             'category_id.exists' => '選択されたカテゴリーが存在しません',
             'tag_ids.*.exists' => '選択されたタグが存在しません',
         ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(
+            response()->json([
+                'message' => '入力されたデータに誤りがあります',
+                'errors' => $validator->errors(),
+            ], 422)
+        );
     }
 }
